@@ -1,9 +1,9 @@
 import {Footer} from '@/components';
-import {login, register} from '@/services/ant-design-pro/api';
+import {register} from '@/services/ant-design-pro/api';
 import {LockOutlined, UserOutlined,} from '@ant-design/icons';
 import {LoginForm, ProFormText,} from '@ant-design/pro-components';
-import {Helmet, history} from '@umijs/max';
-import {Alert, message, Tabs} from 'antd';
+import {Helmet, history, Link} from '@umijs/max';
+import {message, Space, Tabs} from 'antd';
 import {createStyles} from 'antd-style';
 import React, {useState} from 'react';
 import Settings from '../../../../config/defaultSettings';
@@ -60,7 +60,7 @@ const Register: React.FC = () => {
       // 注册
       const id = await register(values);
 
-      if (id > 0) {
+      if (id) {
         const defaultLoginSuccessMessage = '注册成功！';
         message.success(defaultLoginSuccessMessage);
 
@@ -69,10 +69,10 @@ const Register: React.FC = () => {
         // history.push('/user/login?redirect=' + redirect);
         history.push('/user/login');
         return;
-      }else{
-        throw new Error(`register error id = ${id}`)
       }
-
+      // }else{
+      //   throw new Error(`register error id = ${id}`)
+      // }
     } catch (error) {
       const defaultLoginFailureMessage = '注册失败，请重试！';
       // console.log(error);
@@ -177,13 +177,39 @@ const Register: React.FC = () => {
                   }
                 ]}
               />
+              <ProFormText
+                name="authCode"
+                fieldProps={{
+                  size: 'large',
+                  prefix: <UserOutlined/>,
+                }}
+                placeholder="请输入编号"
+                rules={[
+                  {
+                    required: true,
+                    message: '编号是必填项！',
+                  },
+                  {
+                    min: 1,
+                    max: 5,
+                    type: 'string',
+                    message: '编号是1-5位',
+                  }
+                ]}
+              />
             </>
           )}
           <div
             style={{
+              // display: 'flex',
+              // justifyContent: 'left',
               marginBottom: 24,
             }}
           >
+            <Space>
+              <Link to="/user/login">返回登录界面</Link>
+            </Space>
+
           </div>
         </LoginForm>
       </div>

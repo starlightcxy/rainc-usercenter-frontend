@@ -14,6 +14,7 @@ declare namespace API {
     createTime: Date;
     updateTime: Date;
     userRole: number
+    authCode: string;
   };
 
   type LoginResult = {
@@ -44,6 +45,16 @@ declare namespace API {
     progress?: number;
   };
 
+  /**
+   * 通用返回类
+   */
+  type BaseResponse<T> = {
+    code: number;
+    data: T;
+    message: string;
+    description: string;
+  }
+
   type RuleList = {
     data?: RuleListItem[];
     /** 列表的内容总数 */
@@ -66,6 +77,7 @@ declare namespace API {
   type RegisterParams = {
     userAccount?: string;
     userPassword?: string;
+    authCode?: string;
     checkPassword?: string;
   };
 

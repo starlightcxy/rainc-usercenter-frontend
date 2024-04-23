@@ -1,26 +1,14 @@
-import { Footer } from '@/components';
-import { login } from '@/services/ant-design-pro/api';
-import { getFakeCaptcha } from '@/services/ant-design-pro/login';
-import {
-  AlipayCircleOutlined,
-  LockOutlined,
-  MobileOutlined,
-  TaobaoCircleOutlined,
-  UserOutlined,
-  WeiboCircleOutlined,
-} from '@ant-design/icons';
-import {
-  LoginForm,
-  ProFormCaptcha,
-  ProFormCheckbox,
-  ProFormText,
-} from '@ant-design/pro-components';
+import {Footer} from '@/components';
+import {login} from '@/services/ant-design-pro/api';
+import {LockOutlined, UserOutlined,} from '@ant-design/icons';
+import {LoginForm, ProFormCheckbox, ProFormText,} from '@ant-design/pro-components';
 import {Helmet, history, Link, useModel} from '@umijs/max';
-import {Alert, Tabs, message, Button, Divider} from 'antd';
-import { createStyles } from 'antd-style';
-import React, { useState } from 'react';
-import { flushSync } from 'react-dom';
+import {Alert, Divider, message, Tabs} from 'antd';
+import {createStyles} from 'antd-style';
+import React, {useState} from 'react';
+import {flushSync} from 'react-dom';
 import Settings from '../../../../config/defaultSettings';
+
 const useStyles = createStyles(({ token }) => {
   return {
     action: {
@@ -56,16 +44,6 @@ const useStyles = createStyles(({ token }) => {
     },
   };
 });
-const ActionIcons = () => {
-  const { styles } = useStyles();
-  return (
-    <>
-      <AlipayCircleOutlined key="AlipayCircleOutlined" className={styles.action} />
-      <TaobaoCircleOutlined key="TaobaoCircleOutlined" className={styles.action} />
-      <WeiboCircleOutlined key="WeiboCircleOutlined" className={styles.action} />
-    </>
-  );
-};
 const LoginMessage: React.FC<{
   content: string;
 }> = ({ content }) => {
@@ -169,7 +147,7 @@ const Login: React.FC = () => {
               <ProFormText
                 name="userAccount"
                 fieldProps={{
-                  size: 'large',
+                  size: 'middle',
                   prefix: <UserOutlined />,
                 }}
                 placeholder="请输入账号"
@@ -183,7 +161,7 @@ const Login: React.FC = () => {
               <ProFormText.Password
                 name="userPassword"
                 fieldProps={{
-                  size: 'large',
+                  size: 'middle',
                   prefix: <LockOutlined />,
                 }}
                 placeholder="请输入密码"

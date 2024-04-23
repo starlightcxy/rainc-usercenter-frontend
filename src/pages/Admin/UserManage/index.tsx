@@ -2,7 +2,7 @@ import type {ActionType, ProColumns} from '@ant-design/pro-components';
 import {ProTable} from '@ant-design/pro-components';
 import {useRef} from 'react';
 import {searchUsers} from "@/services/ant-design-pro/api";
-import {Image} from "antd";
+import {Image, Tag} from "antd";
 
 
 export const waitTimePromise = async (time: number = 100) => {
@@ -20,7 +20,7 @@ const columns: ProColumns<API.CurrentUser>[] = [
   {
     dataIndex: 'id',
     valueType: 'indexBorder',
-    width: 48,
+    width: 27,
   },
   {
     title: '用户名',
@@ -45,6 +45,11 @@ const columns: ProColumns<API.CurrentUser>[] = [
   {
     title: '性别',
     dataIndex: 'gender',
+    valueType: 'select',
+    valueEnum: {
+      1: { text: <Tag color="cyan-inverse">男</Tag> },
+      0: { text: <Tag color="pink-inverse">女</Tag> },
+    },
   },
   {
     title: '电话',
@@ -59,6 +64,22 @@ const columns: ProColumns<API.CurrentUser>[] = [
   {
     title: '状态',
     dataIndex: 'userStatus',
+    valueType: 'select',
+    valueEnum: {
+      0: {
+        text: <Tag color="success">正常</Tag>,
+        status: 'success',
+      },
+      1: {
+        // text: '注销',
+        text: <Tag color="warning">注销</Tag>,
+        status: 'warning',
+      },
+    }
+  },
+  {
+    title: '编号',
+    dataIndex: 'authCode',
   },
   {
     title: '角色',
@@ -93,9 +114,9 @@ const columns: ProColumns<API.CurrentUser>[] = [
       >
         编辑
       </a>,
-      <a href={record.url} target="_blank" rel="noopener noreferrer" key="view">
-        查看
-      </a>,
+      // <a href={record.url} target="_blank" rel="noopener noreferrer" key="view">
+      //   查看
+      // </a>,
     ],
   },
 ];
